@@ -61,7 +61,10 @@ const main = async () => {
       )
       .replace(
         `\/\/ * (nest-route) define - do not remove this comment.`,
-        `{\n    path: '/${routeNameOfKebabCase}',\n    module: ${routeNameOfPascalCase}Module,\n  },\n  ` +
+        `{\n    path: '/${routeNameOfKebabCase.replace(
+          /-/g,
+          '/'
+        )}',\n    module: ${routeNameOfPascalCase}Module,\n  },\n  ` +
           `\/\/ * (nest-route) define - do not remove this comment.`
       )
     fs.writeFileSync(rootRouteFilePath, newContent)

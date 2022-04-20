@@ -1,6 +1,6 @@
 {
   "name": "nest-route",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create nested routes in nestjs by entering only the 'npx nest-route' command",
   "main": "./dist/index.js",
   "bin": {

@@ -3,8 +3,10 @@ import chalk from 'chalk'
 import fs from 'fs'
 import { nestedFileSearch } from './utils/file'
 import path from 'path'
+import { generateAppRouteFile } from './utils/route'
 
 const main = async () => {
+  await generateAppRouteFile()
   console.log(chalk.green('This command creates a sub-router module.'))
 
   const { rootNameOfKebabCase } = await inquirer.prompt({
@@ -14,10 +16,9 @@ const main = async () => {
       '(Just below the src folder)'
     )}`
   })
-  const rootNameOfPascalCase = rootNameOfKebabCase.replace(
-    /-([a-z])/g,
-    (match, group1) => group1.toUpperCase()
-  )
+  const rootNameOfPascalCase = rootNameOfKebabCase
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 
   const { routeNameOfKebabCase } = await inquirer.prompt({
     type: 'input',
@@ -113,6 +114,7 @@ const main = async () => {
       )})`
     )
   )
+  await generateAppRouteFile()
 }
 
 main()

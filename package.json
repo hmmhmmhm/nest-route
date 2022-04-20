@@ -1,0 +1,73 @@
+{
+  "name": "nest-route",
+  "version": "0.0.1",
+  "description": "Create nested routes in nestjs by entering only the 'npx nest-route' command",
+  "main": "./dist/index.js",
+  "bin": {
+    "nest-route": "bin/nest-route.js"
+  },
+  "scripts": {
+    "start": "npm run build && ([ -d test-e2e ] || mkdir test-e2e) && cd test-e2e && node ../bin/nest-route --dev",
+    "build": "rm -rf dist && tsc",
+    "clean": "rm -rf dist && rm -rf test-e2e",
+    "lint": "prettier --write ./src/**/*.ts",
+    "release": "release-it"
+  },
+  "keywords": [],
+  "author": "hmmhmmhm",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/inquirer": "^7.3.3",
+    "@types/node": "^16.7.1",
+    "@types/update-notifier": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2",
+    "release-it": "^14.11.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": [
+        "npm run lint"
+      ],
+      "after:bump": "npm run build"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write",
+      "eslint --fix src/",
+      "tslint --fix --project .",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmmhmmhm/nest-route.git"
+  },
+  "peerDependencies": {
+    "@nestjs/core": "^8.x",
+    "@nestjs/testing": "^8.x"
+  },
+  "bugs": {
+    "url": "https://github.com/hmmhmmhm/nest-route/issues"
+  }
+}
